@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Happy Birthday, Wulan!</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+
+      /* Reset & base */
+      * {
+        box-sizing: border-box;
+      }
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        font-family: 'Sacramento', cursive;
+        background: linear-gradient(135deg, #c3cfe2, #e9e4f0);
+        overflow-x: hidden;
+      }
+
+      /* Background bokeh circles */
+      body::before,
+      body::after {
+        content: '';
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(100px);
+        opacity: 0.5;
+        pointer-events: none;
+        z-index: 0;
+      }
+      body::before {
+        width: 350px;
+        height: 350px;
+        background: #ff8a80; /* warm pink */
+        top: 15%;
+        left: 10%;
+        animation: floatBokeh 18s ease-in-out infinite alternate;
+      }
+      body::after {
+        width: 300px;
+        height: 300px;
+        background: #82b1ff; /* soft blue */
+        bottom: 15%;
+        right: 15%;
+        animation: floatBokehReverse 22s ease-in-out infinite alternate;
+      }
+
+      @keyframes floatBokeh {
+        0% {
+          transform: translateY(0) translateX(0);
+        }
+        100% {
+          transform: translateY(-40px) translateX(20px);
+        }
+      }
+      @keyframes floatBokehReverse {
+        0% {
+          transform: translateY(0) translateX(0);
+        }
+        100% {
+          transform: translateY(30px) translateX(-30px);
+        }
+      }
+
+      /* Center wrapper for intro */
+      #intro {
+        position: relative;
+        z-index: 5;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        color: #444;
+      }
+
+      #intro h1 {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        color: #333;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      #intro p {
+        font-size: 1.4rem;
+        max-width: 450px;
+        margin-bottom: 3rem;
+        color: #555;
+      }
+
+      #openBtn {
+        background: linear-gradient(135deg, #ff6f91, #ff9671);
+        border: none;
+        border-radius: 50px;
+        padding: 15px 45px;
+        font-size: 1.5rem;
+        color: white;
+        cursor: pointer;
+        box-shadow: 0 8px 15px rgba(255, 111, 145, 0.4);
+        transition: all 0.3s ease;
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+
+      #openBtn:hover {
+        box-shadow: 0 10px 20px rgba(255, 111, 145, 0.6);
+        transform: scale(1.05);
+      }
+
+      /* Birthday card container hidden initially */
+      #cardContainer {
+        opacity: 0;
+        transform: scaleY(0);
+        transform-origin: top center;
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 40px 20px;
+        background: rgba(255 255 255 / 0.2);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        color: #222;
+        text-align: center;
+        transition: opacity 0.8s ease, transform 0.8s ease;
+        pointer-events: none;
+      }
+      #cardContainer.open {
+        opacity: 1;
+        transform: scaleY(1);
+        pointer-events: auto;
+      }
+
+      #cardContainer h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        color: #ff6f91;
+        text-shadow: 0 0 10px #ff6f91aa;
+      }
+
+      #cardContainer p {
+        font-size: 1.3rem;
+        line-height: 1.6;
+        color: #444;
+        margin-bottom: 30px;
+      }
+
+      .photo-wrapper {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+      }
+      .photo-wrapper img {
+        width: 180px;
+        border-radius: 20px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+      .photo-wrapper img:hover {
+        transform: scale(1.05);
+      }
+
+      .balloons {
+        width: 1000px;
+        margin: 0 auto;
+        display: block;
+        animation: floatUp 10s linear infinite;
+        pointer-events: none;
+      }
+      @keyframes floatUp {
+        0% {
+          transform: translateY(100px);
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-110%);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Intro screen -->
+    <div id="intro">
+      <h1>Welcome to Wulan's Birthday Card</h1>
+      <p>Click the button below to open a special birthday greeting 🎉</p>
+      <button id="openBtn">Open Birthday Card</button>
+    </div>
+
+    <!-- Birthday card content -->
+    <div id="cardContainer">
+      <h1>Happy Birthday, Wulan 🎉</h1>
+
+      <div class="photo-wrapper">
+        <img src="WhatsApp Image 2025-06-01 at 05.05.13_a3254266.jpg" alt="Photo Together" />
+        <img src="WhatsApp Image 2025-06-01 at 05.05.13_66b99158.jpg" alt="Selfie of Wulan" />
+        <img src="WhatsApp Image 2025-06-01 at 05.05.13_dddc0b1f.jpg" alt="lovee youuu moree" />
+      </div>
+
+      <p>
+        Today is a special day for someone who means the world to me.<br />
+        Wulan Nabila, thank you for being here and making my days brighter.<br /><br />
+        On your <strong>20th</strong> birthday, I wish you good health, happiness, and success in achieving your dreams.<br />
+        I am grateful to know and love you. Keep shining like the stars you adore ✨<br /><br />
+        Happy birthday, my love ❤️<br /><br />
+        - Love, honey
+      </p>
+
+      <img src="580b585b2edbce24c47b275c.png" alt="Balloons" class="balloons" />
+    </div>
+
+    <script>
+      const openBtn = document.getElementById('openBtn');
+      const intro = document.getElementById('intro');
+      const card = document.getElementById('cardContainer');
+
+      openBtn.addEventListener('click', () => {
+        intro.style.opacity = 0;
+        intro.style.pointerEvents = 'none';
+
+        setTimeout(() => {
+          intro.style.display = 'none';
+          card.classList.add('open');
+        }, 600);
+      });
+    </script>
+    <audio autoplay loop>
+      <source
+        src="https://dl63.ymcdn.org/download?hash=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"
+        type="audio/mpeg"
+      />
+      Your browser does not support the audio element.
+    </audio>
+  </body>
+</html>
